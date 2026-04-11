@@ -1,0 +1,37 @@
+scraped_at,match_date,match_time,home_team,away_team,market_type,selection_name,handicap_or_line,sportsplus_odds,playtime_odds,stake_amount,sportsplus_return,playtime_return,comparison_status
+2026-04-11T02:32:14-04:00,2026-04-12,18:00,Boston Celtics,Orlando Magic,Handicap,Boston Celtics,+4.5,1.88,,,,,missing_playtime
+2026-04-11T02:32:14-04:00,2026-04-12,18:00,Boston Celtics,Orlando Magic,Handicap,Orlando Magic,-4.5,1.98,,,,,missing_playtime
+2026-04-11T02:32:14-04:00,2026-04-12,18:00,Boston Celtics,Orlando Magic,Over / Under,Over,216.5,1.93,,,,,missing_playtime
+2026-04-11T02:32:14-04:00,2026-04-12,18:00,Boston Celtics,Orlando Magic,Over / Under,Under,216.5,1.91,,,,,missing_playtime
+2026-04-11T02:32:14-04:00,2026-04-12,18:00,Boston Celtics,Orlando Magic,Winner,Boston Celtics,,2.26,,,,,missing_playtime
+2026-04-11T02:32:14-04:00,2026-04-12,18:00,Boston Celtics,Orlando Magic,Winner,Orlando Magic,,1.57,,,,,missing_playtime
+2026-04-11T02:32:17-04:00,2026-04-12,18:00,Miami Heat,Atlanta Hawks,Handicap,Atlanta Hawks,-6.5,2.01,,,,,missing_playtime
+2026-04-11T02:32:17-04:00,2026-04-12,18:00,Miami Heat,Atlanta Hawks,Handicap,Miami Heat,+6.5,1.85,,,,,missing_playtime
+2026-04-11T02:32:17-04:00,2026-04-12,18:00,Miami Heat,Atlanta Hawks,Over / Under,Over,243.5,1.90,,,,,missing_playtime
+2026-04-11T02:32:17-04:00,2026-04-12,18:00,Miami Heat,Atlanta Hawks,Over / Under,Under,243.5,1.94,,,,,missing_playtime
+2026-04-11T02:32:17-04:00,2026-04-12,18:00,Miami Heat,Atlanta Hawks,Winner,Atlanta Hawks,,1.37,,,,,missing_playtime
+2026-04-11T02:32:17-04:00,2026-04-12,18:00,Miami Heat,Atlanta Hawks,Winner,Miami Heat,,2.86,,,,,missing_playtime
+2026-04-11T02:32:21-04:00,2026-04-12,18:00,New York Knicks,Charlotte Hornets,Handicap,Charlotte Hornets,-7.5,1.89,,,,,missing_playtime
+2026-04-11T02:32:21-04:00,2026-04-12,18:00,New York Knicks,Charlotte Hornets,Handicap,New York Knicks,+7.5,1.97,,,,,missing_playtime
+2026-04-11T02:32:21-04:00,2026-04-12,18:00,New York Knicks,Charlotte Hornets,Over / Under,Over,215.5,1.92,,,,,missing_playtime
+2026-04-11T02:32:21-04:00,2026-04-12,18:00,New York Knicks,Charlotte Hornets,Over / Under,Under,215.5,1.92,,,,,missing_playtime
+2026-04-11T02:32:21-04:00,2026-04-12,18:00,New York Knicks,Charlotte Hornets,Winner,Charlotte Hornets,,1.33,,,,,missing_playtime
+2026-04-11T02:32:21-04:00,2026-04-12,18:00,New York Knicks,Charlotte Hornets,Winner,New York Knicks,,3.05,,,,,missing_playtime
+2026-04-11T02:32:24-04:00,2026-04-12,20:30,Los Angeles Clippers,Golden State Warriors,Handicap,Golden State Warriors,+9.5,1.88,,,,,missing_playtime
+2026-04-11T02:32:24-04:00,2026-04-12,20:30,Los Angeles Clippers,Golden State Warriors,Handicap,Los Angeles Clippers,-9.5,1.98,,,,,missing_playtime
+2026-04-11T02:32:24-04:00,2026-04-12,20:30,Los Angeles Clippers,Golden State Warriors,Over / Under,Over,224.5,1.92,,,,,missing_playtime
+2026-04-11T02:32:24-04:00,2026-04-12,20:30,Los Angeles Clippers,Golden State Warriors,Over / Under,Under,224.5,1.92,,,,,missing_playtime
+2026-04-11T02:32:24-04:00,2026-04-12,20:30,Los Angeles Clippers,Golden State Warriors,Winner,Golden State Warriors,,3.65,,,,,missing_playtime
+2026-04-11T02:32:24-04:00,2026-04-12,20:30,Los Angeles Clippers,Golden State Warriors,Winner,Los Angeles Clippers,,1.24,,,,,missing_playtime
+2026-04-11T02:32:28-04:00,2026-04-12,20:30,Oklahoma City Thunder,Phoenix Suns,Handicap,Oklahoma City Thunder,-5.5,1.89,,,,,missing_playtime
+2026-04-11T02:32:28-04:00,2026-04-12,20:30,Oklahoma City Thunder,Phoenix Suns,Handicap,Phoenix Suns,+5.5,1.97,,,,,missing_playtime
+2026-04-11T02:32:28-04:00,2026-04-12,20:30,Oklahoma City Thunder,Phoenix Suns,Over / Under,Over,215.5,1.95,,,,,missing_playtime
+2026-04-11T02:32:28-04:00,2026-04-12,20:30,Oklahoma City Thunder,Phoenix Suns,Over / Under,Under,215.5,1.89,,,,,missing_playtime
+2026-04-11T02:32:28-04:00,2026-04-12,20:30,Oklahoma City Thunder,Phoenix Suns,Winner,Oklahoma City Thunder,,1.39,,,,,missing_playtime
+2026-04-11T02:32:28-04:00,2026-04-12,20:30,Oklahoma City Thunder,Phoenix Suns,Winner,Phoenix Suns,,2.76,,,,,missing_playtime
+2026-04-11T02:32:31-04:00,2026-04-12,20:30,San Antonio Spurs,Denver Nuggets,Handicap,Denver Nuggets,-2.5,1.95,,,,,missing_playtime
+2026-04-11T02:32:31-04:00,2026-04-12,20:30,San Antonio Spurs,Denver Nuggets,Handicap,San Antonio Spurs,+2.5,1.91,,,,,missing_playtime
+2026-04-11T02:32:31-04:00,2026-04-12,20:30,San Antonio Spurs,Denver Nuggets,Over / Under,Over,238.5,1.92,,,,,missing_playtime
+2026-04-11T02:32:31-04:00,2026-04-12,20:30,San Antonio Spurs,Denver Nuggets,Over / Under,Under,238.5,1.92,,,,,missing_playtime
+2026-04-11T02:32:31-04:00,2026-04-12,20:30,San Antonio Spurs,Denver Nuggets,Winner,Denver Nuggets,,1.70,,,,,missing_playtime
+2026-04-11T02:32:31-04:00,2026-04-12,20:30,San Antonio Spurs,Denver Nuggets,Winner,San Antonio Spurs,,2.04,,,,,missing_playtime

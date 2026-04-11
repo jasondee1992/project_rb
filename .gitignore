@@ -1,5 +1,7 @@
 .idea/
+.venv/
 venv/
 __pycache__/
 tmp_inspect/
-.env.example
+.env
+,env

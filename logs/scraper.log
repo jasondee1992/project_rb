@@ -1,0 +1,204 @@
+2026-04-11 02:29:19,795 | INFO | __main__ | Cycle 1 start time: 2026-04-11 02:29:19-0400
+2026-04-11 02:29:19,797 | INFO | __main__ | Loaded configuration from .env
+2026-04-11 02:29:19,797 | INFO | __main__ | Using Google credentials file /home/udot/PROJECTS/creds/sports-arb-493002-6fff70e8985a.json
+2026-04-11 02:29:19,797 | INFO | __main__ | Cycle 1 source scraping starting
+2026-04-11 02:29:19,798 | INFO | __main__ | SPORTS PLUS scrape step starting
+2026-04-11 02:29:19,798 | INFO | SportsPlusScraper | Starting scrape for SPORTS PLUS
+2026-04-11 02:29:20,300 | INFO | SportsPlusScraper | SPORTS PLUS browser launch starting
+2026-04-11 02:29:20,861 | INFO | SportsPlusScraper | SPORTS PLUS page created
+2026-04-11 02:29:20,861 | INFO | SportsPlusScraper | Opening https://www.sportsplus.ph/sbk/l/339/matches
+2026-04-11 02:29:26,092 | INFO | SportsPlusScraper | Checking Sports Plus consent modal state
+2026-04-11 02:29:26,172 | INFO | SportsPlusScraper | Sports Plus consent modal detected
+2026-04-11 02:29:26,693 | INFO | SportsPlusScraper | Saved debug artifacts to output/sportsplus_debug_before_consent.html and output/sportsplus_debug_before_consent.png
+2026-04-11 02:29:26,749 | INFO | SportsPlusScraper | Clicked consent control .terms-confirm-checkbox-age-wrapper
+2026-04-11 02:29:26,811 | INFO | SportsPlusScraper | Clicked consent control .terms-confirm-checkbox-wrapper
+2026-04-11 02:29:26,894 | INFO | SportsPlusScraper | Clicked consent control .terms-confirm-checkbox-agree-wrapper
+2026-04-11 02:29:29,909 | INFO | SportsPlusScraper | Consent Submit button still disabled after UI clicks; applying checkbox event fallback
+2026-04-11 02:29:29,978 | INFO | SportsPlusScraper | Clicked Sports Plus consent Submit button
+2026-04-11 02:29:31,469 | INFO | SportsPlusScraper | Saved debug artifacts to output/sportsplus_debug_after_consent.html and output/sportsplus_debug_after_consent.png
+2026-04-11 02:29:31,470 | INFO | SportsPlusScraper | Sports Plus consent modal handled successfully
+2026-04-11 02:29:33,008 | INFO | SportsPlusScraper | sportsplus scroll 1/10: 2907 -> 2907
+2026-04-11 02:29:34,524 | INFO | SportsPlusScraper | sportsplus scroll 2/10: 2907 -> 2907
+2026-04-11 02:29:34,533 | INFO | SportsPlusScraper | Sports Plus visible NBA list entries found: 6
+2026-04-11 02:29:34,533 | INFO | SportsPlusScraper | Opening Sports Plus match 1/6: Boston Celtics vs Orlando Magic
+2026-04-11 02:29:36,840 | INFO | SportsPlusScraper | Sports Plus detail page loaded: https://www.sportsplus.ph/sbk/m/8635843
+2026-04-11 02:29:36,850 | INFO | SportsPlusScraper | Sports Plus detail rows captured for Boston Celtics vs Orlando Magic: 6
+2026-04-11 02:29:38,187 | INFO | SportsPlusScraper | Opening Sports Plus match 2/6: Miami Heat vs Atlanta Hawks
+2026-04-11 02:29:40,396 | INFO | SportsPlusScraper | Sports Plus detail page loaded: https://www.sportsplus.ph/sbk/m/8635844
+2026-04-11 02:29:40,401 | INFO | SportsPlusScraper | Sports Plus detail rows captured for Miami Heat vs Atlanta Hawks: 6
+2026-04-11 02:29:41,684 | INFO | SportsPlusScraper | Opening Sports Plus match 3/6: New York Knicks vs Charlotte Hornets
+2026-04-11 02:29:43,892 | INFO | SportsPlusScraper | Sports Plus detail page loaded: https://www.sportsplus.ph/sbk/m/8635841
+2026-04-11 02:29:43,900 | INFO | SportsPlusScraper | Sports Plus detail rows captured for New York Knicks vs Charlotte Hornets: 6
+2026-04-11 02:29:45,248 | INFO | SportsPlusScraper | Opening Sports Plus match 4/6: Los Angeles Clippers vs Golden State Warriors
+2026-04-11 02:29:47,593 | INFO | SportsPlusScraper | Sports Plus detail page loaded: https://www.sportsplus.ph/sbk/m/8635864
+2026-04-11 02:29:47,619 | INFO | SportsPlusScraper | Sports Plus detail rows captured for Los Angeles Clippers vs Golden State Warriors: 6
+2026-04-11 02:29:49,054 | INFO | SportsPlusScraper | Opening Sports Plus match 5/6: Oklahoma City Thunder vs Phoenix Suns
+2026-04-11 02:29:51,285 | INFO | SportsPlusScraper | Sports Plus detail page loaded: https://www.sportsplus.ph/sbk/m/8635857
+2026-04-11 02:29:51,291 | INFO | SportsPlusScraper | Sports Plus detail rows captured for Oklahoma City Thunder vs Phoenix Suns: 6
+2026-04-11 02:29:52,680 | INFO | SportsPlusScraper | Opening Sports Plus match 6/6: San Antonio Spurs vs Denver Nuggets
+2026-04-11 02:29:55,000 | INFO | SportsPlusScraper | Sports Plus detail page loaded: https://www.sportsplus.ph/sbk/m/8635861
+2026-04-11 02:29:55,020 | INFO | SportsPlusScraper | Sports Plus detail rows captured for San Antonio Spurs vs Denver Nuggets: 6
+2026-04-11 02:29:56,306 | INFO | scraper_sportsplus | Sports Plus extracted 36 rows before final deduplication
+2026-04-11 02:29:56,760 | INFO | SportsPlusScraper | Saved debug artifacts to output/sportsplus_debug.html and output/sportsplus_debug.png
+2026-04-11 02:29:56,782 | INFO | SportsPlusScraper | SPORTS PLUS browser context closed
+2026-04-11 02:29:56,862 | INFO | SportsPlusScraper | SPORTS PLUS browser closed
+2026-04-11 02:29:56,893 | INFO | utils | Saved CSV backup to output/sportsplus_nba_matches.csv
+2026-04-11 02:29:56,893 | INFO | SportsPlusScraper | SPORTS PLUS normalized rows: 36
+2026-04-11 02:29:56,893 | INFO | __main__ | SPORTS PLUS scrape step finished with 36 rows
+2026-04-11 02:29:56,893 | INFO | __main__ | PLAYTIME scrape step starting
+2026-04-11 02:29:56,893 | INFO | PlaytimeScraper | Starting scrape for PLAYTIME
+2026-04-11 02:29:57,393 | INFO | PlaytimeScraper | PLAYTIME browser launch starting
+2026-04-11 02:29:58,020 | INFO | PlaytimeScraper | PLAYTIME page created
+2026-04-11 02:29:58,020 | INFO | PlaytimeScraper | Opening https://px4gtyp.auremi88.com/en/compact/sports/basketball
+2026-04-11 02:30:03,802 | INFO | PlaytimeScraper | Playtime selector lookup for Basketball > Today > Matches
+2026-04-11 02:30:16,466 | INFO | PlaytimeScraper | Exact NBA league block did not appear before scroll; continuing with best-effort extraction
+2026-04-11 02:30:17,996 | INFO | PlaytimeScraper | playtime scroll 1/10: 9847 -> 14803
+2026-04-11 02:30:19,528 | INFO | PlaytimeScraper | playtime scroll 2/10: 14803 -> 19722
+2026-04-11 02:30:21,061 | INFO | PlaytimeScraper | playtime scroll 3/10: 19722 -> 24684
+2026-04-11 02:30:22,579 | INFO | PlaytimeScraper | playtime scroll 4/10: 24684 -> 29558
+2026-04-11 02:30:24,564 | INFO | PlaytimeScraper | playtime scroll 5/10: 29558 -> 34565
+2026-04-11 02:30:26,094 | INFO | PlaytimeScraper | playtime scroll 6/10: 34565 -> 34515
+2026-04-11 02:30:27,611 | INFO | PlaytimeScraper | playtime scroll 7/10: 34515 -> 34515
+2026-04-11 02:30:27,611 | INFO | PlaytimeScraper | Playtime NBA detection starting
+2026-04-11 02:30:27,623 | WARNING | PlaytimeScraper | Playtime NBA section was not available; emitting placeholder row
+2026-04-11 02:30:33,693 | INFO | PlaytimeScraper | Saved debug artifacts to output/playtime_debug.html and output/playtime_debug.png
+2026-04-11 02:30:33,710 | INFO | PlaytimeScraper | PLAYTIME browser context closed
+2026-04-11 02:30:33,788 | INFO | PlaytimeScraper | PLAYTIME browser closed
+2026-04-11 02:30:33,811 | INFO | utils | Saved CSV backup to output/playtime_nba_matches.csv
+2026-04-11 02:30:33,811 | INFO | PlaytimeScraper | PLAYTIME normalized rows: 1
+2026-04-11 02:30:33,811 | INFO | __main__ | PLAYTIME scrape step finished with 1 rows
+2026-04-11 02:30:33,843 | INFO | utils | Saved CSV backup to output/all_nba_matches_combined.csv
+2026-04-11 02:30:33,843 | INFO | __main__ | Comparison generation starting
+2026-04-11 02:30:33,857 | INFO | utils | Saved CSV backup to output/nba_comparison.csv
+2026-04-11 02:30:33,857 | INFO | __main__ | Sports Plus rows scraped: 36
+2026-04-11 02:30:33,857 | INFO | __main__ | PLAYTIME rows scraped: 1
+2026-04-11 02:30:33,859 | INFO | __main__ | placeholder used for PLAYTIME: yes
+2026-04-11 02:30:33,859 | INFO | __main__ | Combined rows after deduplication: 37
+2026-04-11 02:30:33,868 | INFO | __main__ | Sample extracted rows:
+source_label source_site                                  source_url                scraped_at category_name league_name sport_name match_date match_time      home_team     away_team match_status                   market_type selection_name odds handicap_or_line                                                                     raw_text
+ SPORTS PLUS  sportsplus https://www.sportsplus.ph/sbk/l/339/matches 2026-04-11T02:29:36-04:00         TODAY         NBA Basketball 2026-04-12      18:00 Boston Celtics Orlando Magic    Scheduled     Handicap (Incl. Overtime) Boston Celtics 1.88            + 4.5 Handicap (Incl. Overtime) Boston Celtics Orlando Magic + 4.5 1.88 - 4.5 1.98
+ SPORTS PLUS  sportsplus https://www.sportsplus.ph/sbk/l/339/matches 2026-04-11T02:29:36-04:00         TODAY         NBA Basketball 2026-04-12      18:00 Boston Celtics Orlando Magic    Scheduled     Handicap (Incl. Overtime)  Orlando Magic 1.98            - 4.5 Handicap (Incl. Overtime) Boston Celtics Orlando Magic + 4.5 1.88 - 4.5 1.98
+ SPORTS PLUS  sportsplus https://www.sportsplus.ph/sbk/l/339/matches 2026-04-11T02:29:36-04:00         TODAY         NBA Basketball 2026-04-12      18:00 Boston Celtics Orlando Magic    Scheduled Over / Under (Incl. Overtime)           Over 1.93            216.5               Over / Under (Incl. Overtime) Over Under 216.5 1.93 216.5 1.91
+ SPORTS PLUS  sportsplus https://www.sportsplus.ph/sbk/l/339/matches 2026-04-11T02:29:36-04:00         TODAY         NBA Basketball 2026-04-12      18:00 Boston Celtics Orlando Magic    Scheduled Over / Under (Incl. Overtime)          Under 1.91            216.5               Over / Under (Incl. Overtime) Over Under 216.5 1.93 216.5 1.91
+ SPORTS PLUS  sportsplus https://www.sportsplus.ph/sbk/l/339/matches 2026-04-11T02:29:36-04:00         TODAY         NBA Basketball 2026-04-12      18:00 Boston Celtics Orlando Magic    Scheduled       Winner (Incl. Overtime) Boston Celtics 2.26                                                         Winner (Incl. Overtime) 1 2.26 2 1.57
+2026-04-11 02:30:33,868 | INFO | __main__ | Comparison rows generated: 36
+2026-04-11 02:30:33,875 | INFO | __main__ | Sample comparison rows:
+               scraped_at match_date match_time      home_team     away_team  market_type selection_name handicap_or_line sportsplus_odds playtime_odds stake_amount sportsplus_return playtime_return comparison_status
+2026-04-11T02:29:36-04:00 2026-04-12      18:00 Boston Celtics Orlando Magic     Handicap Boston Celtics             +4.5            1.88                                                               missing_playtime
+2026-04-11T02:29:36-04:00 2026-04-12      18:00 Boston Celtics Orlando Magic     Handicap  Orlando Magic             -4.5            1.98                                                               missing_playtime
+2026-04-11T02:29:36-04:00 2026-04-12      18:00 Boston Celtics Orlando Magic Over / Under           Over            216.5            1.93                                                               missing_playtime
+2026-04-11T02:29:36-04:00 2026-04-12      18:00 Boston Celtics Orlando Magic Over / Under          Under            216.5            1.91                                                               missing_playtime
+2026-04-11T02:29:36-04:00 2026-04-12      18:00 Boston Celtics Orlando Magic       Winner Boston Celtics                             2.26                                                               missing_playtime
+2026-04-11 02:30:33,875 | INFO | __main__ | Google Sheets raw NBA worksheet write starting
+2026-04-11 02:30:36,196 | INFO | sheets_writer | Clearing 32 existing worksheet rows before writing NBA
+2026-04-11 02:30:37,119 | INFO | sheets_writer | Replaced worksheet NBA contents with 37 current data rows
+2026-04-11 02:30:37,124 | INFO | __main__ | Google Sheets raw NBA worksheet write complete: 37 rows
+2026-04-11 02:30:37,125 | INFO | __main__ | Google Sheets comparison worksheet write starting
+2026-04-11 02:30:39,182 | INFO | sheets_writer | Clearing 31 existing worksheet rows before writing NBA_COMPARISON
+2026-04-11 02:30:40,022 | INFO | sheets_writer | Replaced worksheet NBA_COMPARISON contents with 36 current data rows
+2026-04-11 02:30:40,025 | INFO | __main__ | Google Sheets comparison worksheet write complete for NBA_COMPARISON: 36 rows
+2026-04-11 02:30:40,026 | INFO | __main__ | Cycle 1 totals: SPORTS PLUS=36 PLAYTIME=1 NBA=37 NBA_COMPARISON=36
+2026-04-11 02:30:40,026 | INFO | __main__ | Cycle 1 end time: 2026-04-11 02:30:40-0400
+2026-04-11 02:30:40,026 | INFO | __main__ | Cycle 1 duration seconds: 80.23
+2026-04-11 02:31:56,985 | INFO | __main__ | Cycle 1 start time: 2026-04-11 02:31:56-0400
+2026-04-11 02:31:56,987 | INFO | __main__ | Loaded configuration from .env
+2026-04-11 02:31:56,987 | INFO | __main__ | Using Google credentials file /home/udot/PROJECTS/creds/sports-arb-493002-6fff70e8985a.json
+2026-04-11 02:31:56,987 | INFO | __main__ | Cycle 1 source scraping starting
+2026-04-11 02:31:56,988 | INFO | __main__ | SPORTS PLUS scrape step starting
+2026-04-11 02:31:56,988 | INFO | SportsPlusScraper | Starting scrape for SPORTS PLUS
+2026-04-11 02:31:57,484 | INFO | SportsPlusScraper | SPORTS PLUS browser launch starting
+2026-04-11 02:31:58,078 | INFO | SportsPlusScraper | SPORTS PLUS page created
+2026-04-11 02:31:58,079 | INFO | SportsPlusScraper | Opening https://www.sportsplus.ph/sbk/l/339/matches
+2026-04-11 02:32:03,308 | INFO | SportsPlusScraper | Checking Sports Plus consent modal state
+2026-04-11 02:32:03,397 | INFO | SportsPlusScraper | Sports Plus consent modal detected
+2026-04-11 02:32:03,844 | INFO | SportsPlusScraper | Saved debug artifacts to output/sportsplus_debug_before_consent.html and output/sportsplus_debug_before_consent.png
+2026-04-11 02:32:03,910 | INFO | SportsPlusScraper | Clicked consent control .terms-confirm-checkbox-age-wrapper
+2026-04-11 02:32:03,972 | INFO | SportsPlusScraper | Clicked consent control .terms-confirm-checkbox-wrapper
+2026-04-11 02:32:04,038 | INFO | SportsPlusScraper | Clicked consent control .terms-confirm-checkbox-agree-wrapper
+2026-04-11 02:32:07,052 | INFO | SportsPlusScraper | Consent Submit button still disabled after UI clicks; applying checkbox event fallback
+2026-04-11 02:32:07,125 | INFO | SportsPlusScraper | Clicked Sports Plus consent Submit button
+2026-04-11 02:32:08,638 | INFO | SportsPlusScraper | Saved debug artifacts to output/sportsplus_debug_after_consent.html and output/sportsplus_debug_after_consent.png
+2026-04-11 02:32:08,638 | INFO | SportsPlusScraper | Sports Plus consent modal handled successfully
+2026-04-11 02:32:10,169 | INFO | SportsPlusScraper | sportsplus scroll 1/10: 2907 -> 2907
+2026-04-11 02:32:11,686 | INFO | SportsPlusScraper | sportsplus scroll 2/10: 2907 -> 2907
+2026-04-11 02:32:11,695 | INFO | SportsPlusScraper | Sports Plus visible NBA list entries found: 6
+2026-04-11 02:32:11,695 | INFO | SportsPlusScraper | Opening Sports Plus match 1/6: Boston Celtics vs Orlando Magic
+2026-04-11 02:32:14,015 | INFO | SportsPlusScraper | Sports Plus detail page loaded: https://www.sportsplus.ph/sbk/m/8635843
+2026-04-11 02:32:14,025 | INFO | SportsPlusScraper | Sports Plus detail rows captured for Boston Celtics vs Orlando Magic: 6
+2026-04-11 02:32:15,364 | INFO | SportsPlusScraper | Opening Sports Plus match 2/6: Miami Heat vs Atlanta Hawks
+2026-04-11 02:32:17,575 | INFO | SportsPlusScraper | Sports Plus detail page loaded: https://www.sportsplus.ph/sbk/m/8635844
+2026-04-11 02:32:17,582 | INFO | SportsPlusScraper | Sports Plus detail rows captured for Miami Heat vs Atlanta Hawks: 6
+2026-04-11 02:32:18,893 | INFO | SportsPlusScraper | Opening Sports Plus match 3/6: New York Knicks vs Charlotte Hornets
+2026-04-11 02:32:21,095 | INFO | SportsPlusScraper | Sports Plus detail page loaded: https://www.sportsplus.ph/sbk/m/8635841
+2026-04-11 02:32:21,105 | INFO | SportsPlusScraper | Sports Plus detail rows captured for New York Knicks vs Charlotte Hornets: 6
+2026-04-11 02:32:22,425 | INFO | SportsPlusScraper | Opening Sports Plus match 4/6: Los Angeles Clippers vs Golden State Warriors
+2026-04-11 02:32:24,759 | INFO | SportsPlusScraper | Sports Plus detail page loaded: https://www.sportsplus.ph/sbk/m/8635864
+2026-04-11 02:32:24,779 | INFO | SportsPlusScraper | Sports Plus detail rows captured for Los Angeles Clippers vs Golden State Warriors: 6
+2026-04-11 02:32:26,111 | INFO | SportsPlusScraper | Opening Sports Plus match 5/6: Oklahoma City Thunder vs Phoenix Suns
+2026-04-11 02:32:28,306 | INFO | SportsPlusScraper | Sports Plus detail page loaded: https://www.sportsplus.ph/sbk/m/8635857
+2026-04-11 02:32:28,315 | INFO | SportsPlusScraper | Sports Plus detail rows captured for Oklahoma City Thunder vs Phoenix Suns: 6
+2026-04-11 02:32:29,595 | INFO | SportsPlusScraper | Opening Sports Plus match 6/6: San Antonio Spurs vs Denver Nuggets
+2026-04-11 02:32:31,944 | INFO | SportsPlusScraper | Sports Plus detail page loaded: https://www.sportsplus.ph/sbk/m/8635861
+2026-04-11 02:32:31,962 | INFO | SportsPlusScraper | Sports Plus detail rows captured for San Antonio Spurs vs Denver Nuggets: 6
+2026-04-11 02:32:33,320 | INFO | scraper_sportsplus | Sports Plus extracted 36 rows before final deduplication
+2026-04-11 02:32:33,786 | INFO | SportsPlusScraper | Saved debug artifacts to output/sportsplus_debug.html and output/sportsplus_debug.png
+2026-04-11 02:32:33,809 | INFO | SportsPlusScraper | SPORTS PLUS browser context closed
+2026-04-11 02:32:33,922 | INFO | SportsPlusScraper | SPORTS PLUS browser closed
+2026-04-11 02:32:33,962 | INFO | utils | Saved CSV backup to output/sportsplus_nba_matches.csv
+2026-04-11 02:32:33,963 | INFO | SportsPlusScraper | SPORTS PLUS normalized rows: 36
+2026-04-11 02:32:33,963 | INFO | __main__ | SPORTS PLUS scrape step finished with 36 rows
+2026-04-11 02:32:33,963 | INFO | __main__ | PLAYTIME scrape step starting
+2026-04-11 02:32:33,963 | INFO | PlaytimeScraper | Starting scrape for PLAYTIME
+2026-04-11 02:32:34,472 | INFO | PlaytimeScraper | PLAYTIME browser launch starting
+2026-04-11 02:32:35,095 | INFO | PlaytimeScraper | PLAYTIME page created
+2026-04-11 02:32:35,095 | INFO | PlaytimeScraper | Opening https://px4gtyp.auremi88.com/en/compact/sports/basketball
+2026-04-11 02:32:40,824 | INFO | PlaytimeScraper | Playtime selector lookup for Basketball > Today > Matches
+2026-04-11 02:32:53,182 | INFO | PlaytimeScraper | Exact NBA league block did not appear before scroll; continuing with best-effort extraction
+2026-04-11 02:32:54,710 | INFO | PlaytimeScraper | playtime scroll 1/10: 8859 -> 13815
+2026-04-11 02:32:56,237 | INFO | PlaytimeScraper | playtime scroll 2/10: 13815 -> 18733
+2026-04-11 02:32:57,756 | INFO | PlaytimeScraper | playtime scroll 3/10: 18733 -> 23696
+2026-04-11 02:32:59,304 | INFO | PlaytimeScraper | playtime scroll 4/10: 23696 -> 28570
+2026-04-11 02:33:01,309 | INFO | PlaytimeScraper | playtime scroll 5/10: 28570 -> 33577
+2026-04-11 02:33:02,826 | INFO | PlaytimeScraper | playtime scroll 6/10: 33577 -> 33527
+2026-04-11 02:33:04,353 | INFO | PlaytimeScraper | playtime scroll 7/10: 33527 -> 33527
+2026-04-11 02:33:04,354 | INFO | PlaytimeScraper | Playtime NBA detection starting
+2026-04-11 02:33:04,365 | WARNING | PlaytimeScraper | Playtime NBA section was not available; emitting placeholder row
+2026-04-11 02:33:10,114 | INFO | PlaytimeScraper | Saved debug artifacts to output/playtime_debug.html and output/playtime_debug.png
+2026-04-11 02:33:10,131 | INFO | PlaytimeScraper | PLAYTIME browser context closed
+2026-04-11 02:33:10,215 | INFO | PlaytimeScraper | PLAYTIME browser closed
+2026-04-11 02:33:10,240 | INFO | utils | Saved CSV backup to output/playtime_nba_matches.csv
+2026-04-11 02:33:10,240 | INFO | PlaytimeScraper | PLAYTIME normalized rows: 1
+2026-04-11 02:33:10,240 | INFO | __main__ | PLAYTIME scrape step finished with 1 rows
+2026-04-11 02:33:10,253 | INFO | utils | Saved CSV backup to output/all_nba_matches_combined.csv
+2026-04-11 02:33:10,254 | INFO | __main__ | Comparison generation starting
+2026-04-11 02:33:10,261 | INFO | utils | Saved CSV backup to output/nba_comparison.csv
+2026-04-11 02:33:10,261 | INFO | __main__ | Sports Plus rows scraped: 36
+2026-04-11 02:33:10,261 | INFO | __main__ | PLAYTIME rows scraped: 1
+2026-04-11 02:33:10,262 | INFO | __main__ | placeholder used for PLAYTIME: yes
+2026-04-11 02:33:10,262 | INFO | __main__ | Combined rows after deduplication: 37
+2026-04-11 02:33:10,268 | INFO | __main__ | Sample extracted rows:
+source_label source_site                                  source_url                scraped_at category_name league_name sport_name match_date match_time      home_team     away_team match_status                   market_type selection_name odds handicap_or_line                                                                     raw_text
+ SPORTS PLUS  sportsplus https://www.sportsplus.ph/sbk/l/339/matches 2026-04-11T02:32:14-04:00         TODAY         NBA Basketball 2026-04-12      18:00 Boston Celtics Orlando Magic    Scheduled     Handicap (Incl. Overtime) Boston Celtics 1.88            + 4.5 Handicap (Incl. Overtime) Boston Celtics Orlando Magic + 4.5 1.88 - 4.5 1.98
+ SPORTS PLUS  sportsplus https://www.sportsplus.ph/sbk/l/339/matches 2026-04-11T02:32:14-04:00         TODAY         NBA Basketball 2026-04-12      18:00 Boston Celtics Orlando Magic    Scheduled     Handicap (Incl. Overtime)  Orlando Magic 1.98            - 4.5 Handicap (Incl. Overtime) Boston Celtics Orlando Magic + 4.5 1.88 - 4.5 1.98
+ SPORTS PLUS  sportsplus https://www.sportsplus.ph/sbk/l/339/matches 2026-04-11T02:32:14-04:00         TODAY         NBA Basketball 2026-04-12      18:00 Boston Celtics Orlando Magic    Scheduled Over / Under (Incl. Overtime)           Over 1.93            216.5               Over / Under (Incl. Overtime) Over Under 216.5 1.93 216.5 1.91
+ SPORTS PLUS  sportsplus https://www.sportsplus.ph/sbk/l/339/matches 2026-04-11T02:32:14-04:00         TODAY         NBA Basketball 2026-04-12      18:00 Boston Celtics Orlando Magic    Scheduled Over / Under (Incl. Overtime)          Under 1.91            216.5               Over / Under (Incl. Overtime) Over Under 216.5 1.93 216.5 1.91
+ SPORTS PLUS  sportsplus https://www.sportsplus.ph/sbk/l/339/matches 2026-04-11T02:32:14-04:00         TODAY         NBA Basketball 2026-04-12      18:00 Boston Celtics Orlando Magic    Scheduled       Winner (Incl. Overtime) Boston Celtics 2.26                                                         Winner (Incl. Overtime) 1 2.26 2 1.57
+2026-04-11 02:33:10,268 | INFO | __main__ | Comparison rows generated: 36
+2026-04-11 02:33:10,273 | INFO | __main__ | Sample comparison rows:
+               scraped_at match_date match_time      home_team     away_team  market_type selection_name handicap_or_line sportsplus_odds playtime_odds stake_amount sportsplus_return playtime_return comparison_status
+2026-04-11T02:32:14-04:00 2026-04-12      18:00 Boston Celtics Orlando Magic     Handicap Boston Celtics             +4.5            1.88                                                               missing_playtime
+2026-04-11T02:32:14-04:00 2026-04-12      18:00 Boston Celtics Orlando Magic     Handicap  Orlando Magic             -4.5            1.98                                                               missing_playtime
+2026-04-11T02:32:14-04:00 2026-04-12      18:00 Boston Celtics Orlando Magic Over / Under           Over            216.5            1.93                                                               missing_playtime
+2026-04-11T02:32:14-04:00 2026-04-12      18:00 Boston Celtics Orlando Magic Over / Under          Under            216.5            1.91                                                               missing_playtime
+2026-04-11T02:32:14-04:00 2026-04-12      18:00 Boston Celtics Orlando Magic       Winner Boston Celtics                             2.26                                                               missing_playtime
+2026-04-11 02:33:10,273 | INFO | __main__ | Google Sheets raw NBA worksheet write starting
+2026-04-11 02:33:12,228 | INFO | sheets_writer | Clearing 38 existing worksheet rows before writing NBA
+2026-04-11 02:33:12,913 | INFO | sheets_writer | Replaced worksheet NBA contents with 37 current data rows
+2026-04-11 02:33:12,919 | INFO | __main__ | Google Sheets raw NBA worksheet write complete: 37 rows
+2026-04-11 02:33:12,921 | INFO | __main__ | Google Sheets comparison worksheet write starting
+2026-04-11 02:33:14,763 | INFO | sheets_writer | Clearing 37 existing worksheet rows before writing NBA_COMPARISON
+2026-04-11 02:33:15,371 | INFO | sheets_writer | Replaced worksheet NBA_COMPARISON contents with 36 current data rows
+2026-04-11 02:33:15,376 | INFO | __main__ | Google Sheets comparison worksheet write complete for NBA_COMPARISON: 36 rows
+2026-04-11 02:33:15,378 | INFO | __main__ | Cycle 1 totals: SPORTS PLUS=36 PLAYTIME=1 NBA=37 NBA_COMPARISON=36
+2026-04-11 02:33:15,378 | INFO | __main__ | Cycle 1 end time: 2026-04-11 02:33:15-0400
+2026-04-11 02:33:15,379 | INFO | __main__ | Cycle 1 duration seconds: 78.39
