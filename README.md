@@ -1,6 +1,6 @@
 # NBA Sportsbook Scraper
 
-This project scrapes NBA betting rows from Sports Plus and Playtime with Playwright, normalizes both sources into one schema, saves CSV backups, and replaces the `Sports Betting Data` spreadsheet `NBA` worksheet with the latest scrape each run.
+This project scrapes NBA betting rows from Sports Plus and Playtime with Playwright, normalizes both sources into one schema, saves CSV backups, and replaces the `Sports Betting Data` spreadsheet `NBA` worksheet with the latest scrape each run. It also rebuilds `NBA_COMPARISON` as a read-only arbitrage monitoring dashboard that stays analytical only.
 
 ## Project Structure
 
@@ -46,11 +46,15 @@ SPORTSPLUS_URL=https://www.sportsplus.ph/sbk/l/339/matches
 PLAYTIME_URL=https://px4gtyp.auremi88.com/en/compact/sports/basketball
 SPORTSPLUS_SOURCE_LABEL=SPORTS PLUS
 PLAYTIME_SOURCE_LABEL=PLAYTIME
-HEADLESS=false
+HEADLESS=true
 GOOGLE_SHEET_NAME=Sports Betting Data
 GOOGLE_WORKSHEET_NAME=NBA
 COMPARISON_WORKSHEET_NAME=NBA_COMPARISON
 GOOGLE_CREDS_JSON=
+ARB_TOTAL_STAKE=2000
+MIN_GUARANTEED_PROFIT=20
+MIN_GUARANTEED_PROFIT_PERCENT=1
+MAX_STAKE_PER_SIDE=1500
 SCROLL_PAUSE_MS=1500
 MAX_SCROLLS=10
 REFRESH_INTERVAL_SECONDS=300
@@ -59,7 +63,7 @@ MAX_CYCLES=1
 RUN_FOREVER=false
 ```
 
-The loader checks `.env` first and falls back to `,env` only if `.env` is not present.
+The runtime config loader uses only `.env`. `.env.example` is a template and is not loaded at runtime.
 
 ## Dynamic Google Credentials Detection
 
@@ -79,6 +83,7 @@ If neither the environment value nor the OS fallback exists, the scraper raises 
 
 1. Load runtime settings from `.env`.
 2. Launch Chromium with Playwright.
+Chromium runs in headless mode by default and uses the `HEADLESS` environment variable for every browser launch.
 3. Open the Sports Plus NBA list page and handle the consent modal before reading match cards.
 4. Click each visible Sports Plus NBA match, scrape the detail page markets, then return to the list for the next match.
 5. Scrape Playtime `Basketball > TODAY > NBA` from the rendered odds table.
@@ -87,8 +92,10 @@ If neither the environment value nor the OS fallback exists, the scraper raises 
 8. Save `output/sportsplus_nba_matches.csv`, `output/playtime_nba_matches.csv`, and `output/all_nba_matches_combined.csv`.
 9. Deduplicate rows only within the current run.
 10. Clear the `NBA` worksheet and write only the latest current dataset.
-11. Clear and rewrite `NBA_COMPARISON` with the latest comparison output.
-12. Write logs to both the console and `logs/scraper.log`.
+11. Build true two-outcome arbitrage comparisons from the latest raw `NBA` rows using `ARB_TOTAL_STAKE`.
+12. Label the comparison output with analytical statuses such as `positive_arb_candidate`, `break_even_candidate`, `no_arb`, and mismatch or missing statuses when rows are not truly comparable.
+13. Clear and rewrite `NBA_COMPARISON` with the latest dashboard output.
+14. Write logs to both the console and `logs/scraper.log`.
 Rows are deduplicated within the current run using:
    - `source_site`
    - `match_date`
@@ -106,12 +113,14 @@ Rows are deduplicated within the current run using:
 - Each run clears old worksheet data and writes a fresh header plus the latest current scrape results.
 - Old rows from prior runs are removed instead of being preserved historically.
 - If `NBA_COMPARISON` does not exist, the script creates it automatically.
-- If `NBA_COMPARISON` already exists, the script clears it and rewrites the latest comparison output.
+- If `NBA_COMPARISON` already exists, the script clears it and rewrites the latest analytical dashboard output.
 - Raw worksheet write failures and comparison worksheet write failures are logged separately.
 - Every row keeps source metadata:
   - Sports Plus rows use `source_label=SPORTS PLUS`, `source_site=sportsplus`
   - Playtime rows use `source_label=PLAYTIME`, `source_site=playtime`
 - If Playtime has no NBA rows at scrape time, the script writes one placeholder Playtime row with `match_status=none as of this moment`.
+- Arbitrage calculations use `ARB_TOTAL_STAKE` as the total theoretical bankroll for each matched two-outcome pair and split that bankroll dynamically across both sides.
+- `MIN_GUARANTEED_PROFIT`, `MIN_GUARANTEED_PROFIT_PERCENT`, and `MAX_STAKE_PER_SIDE` are optional dashboard thresholds used for labels and risk notes. They do not create direct betting commands.
 
 ## Final Output Schema
 
@@ -140,9 +149,13 @@ raw_text
 ## Troubleshooting
 
 - If Playwright cannot start Chromium, run `playwright install chromium`.
+- `HEADLESS=true` is the recommended mode for continuous background execution. Set `HEADLESS=false` only when you explicitly need a visible browser for local debugging.
+- The intended virtual environment folder is `.venv`. Do not use a separate `venv/` folder.
 - If the sportsbooks change their layout, inspect the latest debug HTML and PNG files in `output/`.
 - Sports Plus may show a consent modal before the page is usable. The scraper now logs whether the modal appeared and saves debug artifacts before and after handling it.
 - Sports Plus detail scraping now relies on the clicked match page and extracts `Handicap (Incl. Overtime)`, `Over / Under (Incl. Overtime)`, and `Winner (Incl. Overtime)` when those markets are visible.
+- The arbitrage comparison CSV is written to `output/nba_arbitrage_comparison.csv` before the `NBA_COMPARISON` worksheet update.
+- `NBA_COMPARISON` is informational only. It estimates candidate arbitrage metrics and stake splits but does not emit direct betting instructions or any `GO BET` style signal.
 - If Playtime stops exposing the NBA table under the default Basketball page, re-check the selectors around the Basketball item, the `Today` tab, and the `Matches` market.
 - If Google Sheets upload fails immediately, verify the credentials path resolution and make sure the service account still has access to the `Sports Betting Data` spreadsheet.
 - If Playtime has no live NBA section, expect a single placeholder row in the sheet rather than a hard failure.

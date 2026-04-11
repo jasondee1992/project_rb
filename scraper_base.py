@@ -27,6 +27,7 @@ class BaseScraper(ABC):
             page = None
             try:
                 self.logger.info("%s browser launch starting", self.source.source_label)
+                self.logger.info("Launching browser with headless=%s", self.settings.headless)
                 browser = with_retries(
                     operation_name=f"{self.source.name} browser launch",
                     action=lambda: self._launch_browser(playwright),

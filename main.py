@@ -10,8 +10,13 @@ from pathlib import Path
 import pandas as pd
 from dotenv import load_dotenv
 
-from comparison_builder import COMPARISON_COLUMNS, build_comparison_dataframe, build_missing_both_dataframe
-from config import load_settings
+from comparison_builder import (
+    COMPARISON_COLUMNS,
+    build_comparison_dataframe,
+    build_missing_both_dataframe,
+    summarize_comparison_dataframe,
+)
+from config import ENV_FILE_NAME, load_settings
 from exceptions import ComparisonError, ScraperError, SheetsWriteError
 from scraper_playtime import PlaytimeScraper
 from scraper_sportsplus import SportsPlusScraper
@@ -20,12 +25,15 @@ from utils import FINAL_COLUMNS, dataframe_sample_text, deduplicate_dataframe, s
 
 
 LOGGER = logging.getLogger(__name__)
+SIMPLIFIED_COMPARISON_STAKE = 100.0
 
 
 def main() -> int:
     _bootstrap_env()
     log_file_path = Path("logs") / "scraper.log"
     configure_logging(log_file_path)
+    LOGGER.info("Script start")
+    LOGGER.info("Python executable=%s", sys.executable)
 
     run_forever = _parse_bool_env("RUN_FOREVER", default=False)
     max_cycles = int(os.getenv("MAX_CYCLES", "1"))
@@ -38,11 +46,21 @@ def main() -> int:
             cycle_number += 1
             cycle_started_at = time.time()
             LOGGER.info("Cycle %s start time: %s", cycle_number, time.strftime("%Y-%m-%d %H:%M:%S%z"))
+            LOGGER.info("Cycle %s heartbeat: scraper active", cycle_number)
             try:
                 settings = load_settings()
                 refresh_interval_seconds = settings.refresh_interval_seconds
-                LOGGER.info("Loaded configuration from %s", settings.env_file_used or "environment variables")
-                LOGGER.info("Using Google credentials file %s", settings.google_creds_json)
+                LOGGER.info("Loaded HEADLESS=%s", settings.headless)
+                LOGGER.info("Loaded ARB_TOTAL_STAKE=%s", settings.arb_total_stake)
+                LOGGER.info("Loaded simplified NBA_COMPARISON stake=%s", SIMPLIFIED_COMPARISON_STAKE)
+                LOGGER.info("Loaded MIN_GUARANTEED_PROFIT=%s", settings.min_guaranteed_profit)
+                LOGGER.info("Loaded MIN_GUARANTEED_PROFIT_PERCENT=%s", settings.min_guaranteed_profit_percent)
+                LOGGER.info("Loaded MAX_STAKE_PER_SIDE=%s", settings.max_stake_per_side)
+                LOGGER.info("Resolved Google credentials path=%s", settings.google_creds_json)
+                if settings.env_file_used:
+                    LOGGER.info("Using %s configuration successfully", settings.env_file_used)
+                else:
+                    LOGGER.info("No %s file found; using process environment variables", ENV_FILE_NAME)
                 _run_cycle(cycle_number, settings)
                 last_exit_code = 0
             except KeyboardInterrupt:
@@ -75,15 +93,26 @@ def _run_cycle(cycle_number: int, settings) -> None:
 
     combined_df = pd.concat([sportsplus_df, playtime_df], ignore_index=True)
     combined_df = deduplicate_dataframe(combined_df.reindex(columns=FINAL_COLUMNS).fillna(""))
+    combined_csv_started_at = time.time()
     save_csv_backup(combined_df, settings.combined_csv_path)
+    LOGGER.info("Combined CSV export duration seconds: %.2f", time.time() - combined_csv_started_at)
 
     LOGGER.info("Comparison generation starting")
     try:
-        comparison_df = build_comparison_dataframe(combined_df)
+        comparison_df = build_comparison_dataframe(
+            combined_df,
+            total_stake=SIMPLIFIED_COMPARISON_STAKE,
+            min_guaranteed_profit=settings.min_guaranteed_profit,
+            min_guaranteed_profit_percent=settings.min_guaranteed_profit_percent,
+            max_stake_per_side=settings.max_stake_per_side,
+        )
     except ComparisonError:
         LOGGER.exception("Comparison generation failed")
-        comparison_df = build_missing_both_dataframe()
+        comparison_df = build_missing_both_dataframe(total_stake=SIMPLIFIED_COMPARISON_STAKE)
+    comparison_csv_started_at = time.time()
     save_csv_backup(comparison_df, settings.comparison_csv_path, columns=COMPARISON_COLUMNS)
+    LOGGER.info("Comparison CSV export duration seconds: %.2f", time.time() - comparison_csv_started_at)
+    comparison_summary = summarize_comparison_dataframe(comparison_df)
 
     LOGGER.info("Sports Plus rows scraped: %s", len(sportsplus_df))
     LOGGER.info("PLAYTIME rows scraped: %s", len(playtime_df))
@@ -91,17 +120,31 @@ def _run_cycle(cycle_number: int, settings) -> None:
     LOGGER.info("Combined rows after deduplication: %s", len(combined_df))
     LOGGER.info("Sample extracted rows:\n%s", dataframe_sample_text(combined_df))
     LOGGER.info("Comparison rows generated: %s", len(comparison_df))
+    LOGGER.info("Comparable pairs found: %s", comparison_summary["comparable_pairs"])
+    LOGGER.info("positive_arb_candidate rows found: %s", comparison_summary["positive_arb_candidates"])
+    LOGGER.info("break_even_candidate rows found: %s", comparison_summary["break_even_candidates"])
+    LOGGER.info("no_arb rows found: %s", comparison_summary["no_arb_rows"])
+    LOGGER.info("mismatch/missing rows found: %s", comparison_summary["mismatch_missing_rows"])
     LOGGER.info("Sample comparison rows:\n%s", dataframe_sample_text(comparison_df))
 
     nba_rows_written = 0
     comparison_rows_written = 0
+    nba_write_started_at = time.time()
     try:
         LOGGER.info("Google Sheets raw NBA worksheet write starting")
         nba_rows_written = replace_worksheet_rows(settings, combined_df)
-        LOGGER.info("Google Sheets raw NBA worksheet write complete: %s rows", nba_rows_written)
+        LOGGER.info(
+            "Google Sheets raw NBA worksheet write complete: %s rows in %.2f seconds",
+            nba_rows_written,
+            time.time() - nba_write_started_at,
+        )
     except SheetsWriteError:
-        LOGGER.exception("Google Sheets raw NBA worksheet write failed")
+        LOGGER.exception(
+            "Google Sheets raw NBA worksheet write failed after %.2f seconds",
+            time.time() - nba_write_started_at,
+        )
 
+    comparison_write_started_at = time.time()
     try:
         LOGGER.info("Google Sheets comparison worksheet write starting")
         comparison_rows_written = replace_or_create_worksheet_rows(
@@ -111,26 +154,41 @@ def _run_cycle(cycle_number: int, settings) -> None:
             columns=COMPARISON_COLUMNS,
         )
         LOGGER.info(
-            "Google Sheets comparison worksheet write complete for %s: %s rows",
+            "Google Sheets comparison worksheet write complete for %s: %s rows in %.2f seconds",
             settings.comparison_worksheet_name,
             comparison_rows_written,
+            time.time() - comparison_write_started_at,
         )
     except SheetsWriteError:
-        LOGGER.exception("Google Sheets comparison worksheet write failed")
+        LOGGER.exception(
+            "Google Sheets comparison worksheet write failed after %.2f seconds",
+            time.time() - comparison_write_started_at,
+        )
 
     LOGGER.info("Cycle %s totals: SPORTS PLUS=%s PLAYTIME=%s NBA=%s NBA_COMPARISON=%s", cycle_number, len(sportsplus_df), len(playtime_df), nba_rows_written, comparison_rows_written)
 
 
 def _run_source_scraper(source_name: str, action):
+    started_at = time.time()
     try:
         LOGGER.info("%s scrape step starting", source_name)
         dataframe = action()
-        LOGGER.info("%s scrape step finished with %s rows", source_name, len(dataframe))
+        LOGGER.info(
+            "%s scrape step finished with %s rows in %.2f seconds",
+            source_name,
+            len(dataframe),
+            time.time() - started_at,
+        )
         return dataframe
     except ScraperError:
-        LOGGER.exception("%s scrape step failed", source_name)
+        LOGGER.exception("%s scrape step failed after %.2f seconds", source_name, time.time() - started_at)
     except Exception as error:  # noqa: BLE001
-        LOGGER.exception("%s scrape step failed unexpectedly: %s", source_name, error)
+        LOGGER.exception(
+            "%s scrape step failed unexpectedly after %.2f seconds: %s",
+            source_name,
+            time.time() - started_at,
+            error,
+        )
     return pd.DataFrame(columns=FINAL_COLUMNS)
 
 
@@ -143,7 +201,7 @@ def _playtime_placeholder_used(dataframe: pd.DataFrame) -> str:
 
 def configure_logging(log_file_path: Path) -> None:
     log_file_path.parent.mkdir(parents=True, exist_ok=True)
-    formatter = logging.Formatter("%(asctime)s | %(levelname)s | %(name)s | %(message)s")
+    formatter = logging.Formatter("%(asctime)s | %(levelname)s | %(message)s")
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setFormatter(formatter)
     file_handler = logging.FileHandler(log_file_path, encoding="utf-8")
@@ -156,11 +214,9 @@ def configure_logging(log_file_path: Path) -> None:
 
 
 def _bootstrap_env() -> None:
-    for candidate in (".env", ",env"):
-        env_path = Path(candidate)
-        if env_path.exists():
-            load_dotenv(env_path, override=False)
-            return
+    env_path = Path(ENV_FILE_NAME)
+    if env_path.exists():
+        load_dotenv(env_path, override=False)
 
 
 def _parse_bool_env(name: str, default: bool) -> bool:

@@ -1,7 +1,9 @@
 .idea/
 .venv/
-venv/
 __pycache__/
+logs/
+output/
 tmp_inspect/
+tmp_inspect_playtime/
 .env
-,env
+

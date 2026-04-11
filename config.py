@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 from utils import parse_bool
 
 
+ENV_FILE_NAME = ".env"
 DEFAULT_LINUX_CREDS_PATH = Path("/home/udot/PROJECTS/sports-arb-493002-6fff70e8985a.json")
 DEFAULT_WINDOWS_CREDS_PATH = Path("D:/Projects/creds/sports-arb-493002-6fff70e8985a.json")
 
@@ -34,6 +35,10 @@ class Settings:
     google_worksheet_name: str
     comparison_worksheet_name: str
     google_creds_json: Path
+    arb_total_stake: float
+    min_guaranteed_profit: float
+    min_guaranteed_profit_percent: float
+    max_stake_per_side: float
     scroll_pause_ms: int
     max_scrolls: int
     output_dir: Path
@@ -85,11 +90,15 @@ def load_settings() -> Settings:
         google_worksheet_name=_get_required_env("GOOGLE_WORKSHEET_NAME"),
         comparison_worksheet_name=os.getenv("COMPARISON_WORKSHEET_NAME", "NBA_COMPARISON").strip() or "NBA_COMPARISON",
         google_creds_json=_resolve_google_creds_path(),
+        arb_total_stake=float(os.getenv("ARB_TOTAL_STAKE", "2000").strip() or "2000"),
+        min_guaranteed_profit=float(os.getenv("MIN_GUARANTEED_PROFIT", "20").strip() or "20"),
+        min_guaranteed_profit_percent=float(os.getenv("MIN_GUARANTEED_PROFIT_PERCENT", "1").strip() or "1"),
+        max_stake_per_side=float(os.getenv("MAX_STAKE_PER_SIDE", "1500").strip() or "1500"),
         scroll_pause_ms=int(os.getenv("SCROLL_PAUSE_MS", "1500")),
         max_scrolls=int(os.getenv("MAX_SCROLLS", "10")),
         output_dir=output_dir,
         combined_csv_path=output_dir / "all_nba_matches_combined.csv",
-        comparison_csv_path=output_dir / "nba_comparison.csv",
+        comparison_csv_path=output_dir / "nba_arbitrage_comparison.csv",
         logs_dir=logs_dir,
         log_file_path=logs_dir / "scraper.log",
         refresh_interval_seconds=_get_refresh_interval_seconds(),
@@ -100,11 +109,10 @@ def load_settings() -> Settings:
 
 
 def _load_first_env_file() -> str | None:
-    for candidate in (".env", ",env"):
-        env_path = Path(candidate)
-        if env_path.exists():
-            load_dotenv(env_path, override=False)
-            return candidate
+    env_path = Path(ENV_FILE_NAME)
+    if env_path.exists():
+        load_dotenv(env_path, override=False)
+        return ENV_FILE_NAME
     return None
 
 

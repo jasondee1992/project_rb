@@ -106,10 +106,14 @@ def build_dedup_key(row: dict[str, Any]) -> str:
 
 
 def save_csv_backup(dataframe: pd.DataFrame, path: Path, columns: list[str] | None = None) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    target_columns = columns or FINAL_COLUMNS
-    dataframe.reindex(columns=target_columns).fillna("").to_csv(path, index=False)
-    LOGGER.info("Saved CSV backup to %s", path)
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        target_columns = columns or FINAL_COLUMNS
+        dataframe.reindex(columns=target_columns).fillna("").to_csv(path, index=False)
+        LOGGER.info("Saved CSV backup to %s", path)
+    except Exception as error:  # noqa: BLE001
+        LOGGER.exception("CSV export failed for %s: %s", path, error)
+        raise
 
 
 def dataframe_sample_text(dataframe: pd.DataFrame, rows: int = 5) -> str:

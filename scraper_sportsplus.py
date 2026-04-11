@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 import re
+import time
 from datetime import datetime
 from urllib.parse import urljoin
 
@@ -42,28 +43,33 @@ class SportsPlusScraper(BaseScraper):
             away_team = clean_text(entry.get("away_team", ""))
             href = clean_text(entry.get("href", ""))
             self.logger.info(
-                "Opening Sports Plus match %s/%s: %s vs %s",
+                "Sports Plus match click start %s/%s: %s vs %s",
                 index,
                 len(list_entries),
                 home_team,
                 away_team,
             )
+            match_started_at = time.time()
 
             try:
                 self._open_match_detail(page, href)
                 detail_rows = self._extract_detail_rows(page, entry)
                 rows.extend(detail_rows)
                 self.logger.info(
-                    "Sports Plus detail rows captured for %s vs %s: %s",
+                    "Sports Plus match click end %s/%s: %s vs %s rows=%s duration_seconds=%.2f",
+                    index,
+                    len(list_entries),
                     home_team,
                     away_team,
                     len(detail_rows),
+                    time.time() - match_started_at,
                 )
             except Exception as error:  # noqa: BLE001
-                self.logger.error(
-                    "Sports Plus detail scrape failed for %s vs %s: %s",
+                self.logger.exception(
+                    "Sports Plus detail scrape failed for %s vs %s after %.2f seconds: %s",
                     home_team,
                     away_team,
+                    time.time() - match_started_at,
                     error,
                 )
             finally:
