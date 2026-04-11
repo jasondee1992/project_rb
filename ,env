@@ -1,0 +1,8 @@
+SPORTSPLUS_URL=https://www.sportsplus.ph/sbk/l/339/matches
+PLAYTIME_URL=https://px4gtyp.auremi88.com/en/compact/sports/basketball
+HEADLESS=false
+GOOGLE_SHEET_NAME=Sports Betting Data
+GOOGLE_WORKSHEET_NAME=NBA
+GOOGLE_CREDS_JSON=D:/Projects/creds/sports-arb-493002-6fff70e8985a.json
+SCROLL_PAUSE_MS=1500
+MAX_SCROLLS=10
